@@ -1,5 +1,6 @@
 package com.curso.ecommerce.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,12 @@ public class ProductoService implements ProductoDao{
 	public void delete(Integer id) {
 		
 		daoJpa.deleteById(id);
+	}
+
+	@Override
+	public List<Producto> findAll() {
+		
+		return daoJpa.findAll();
 	}
 
 }

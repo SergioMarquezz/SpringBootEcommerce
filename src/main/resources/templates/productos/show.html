@@ -53,7 +53,7 @@
 					<td th:text="${product.cantidad}"></td>
 					<td th:text="${product.precio}"></td>
 					<td><a class="btn btn-warning" th:href="@{productos/edit/{id} (id=${product.id})}">Editar</a> </td>
-					<td><a class="btn btn-danger" href="">Eliminar</a> </td>
+					<td><a class="btn btn-danger" th:href="@{productos/delete/{id} (id=${product.id})}">Eliminar</a> </td>
 				</tr>
 			</tbody>
 		</table>

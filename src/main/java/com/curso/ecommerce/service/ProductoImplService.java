@@ -11,10 +11,10 @@ import com.curso.ecommerce.repository.ProductoDao;
 import com.curso.ecommerce.repository.ProductoDaoJpa;
 
 @Service
-public class ProductoService implements ProductoDao{
+public class ProductoImplService implements ProductoDao{
 
 	@Autowired
-	ProductoDaoJpa daoJpa;
+	private ProductoDaoJpa daoJpa;
 	
 	@Override
 	public Producto save(Producto producto) {

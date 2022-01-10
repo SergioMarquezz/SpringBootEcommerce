@@ -1,17 +1,20 @@
 package com.curso.ecommerce.controller;
 
+import com.curso.ecommerce.model.DetalleOrden;
+import com.curso.ecommerce.model.Orden;
 import com.curso.ecommerce.model.Producto;
-import com.curso.ecommerce.service.ProductoService;
+import com.curso.ecommerce.model.Usuario;
+import com.curso.ecommerce.service.ProductoImplService;
+import com.curso.ecommerce.service.UsuarioImplService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -21,10 +24,18 @@ public class HomeController {
     private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
-    private ProductoService serviceProducto;
+    private ProductoImplService serviceProducto;
+    @Autowired
+    private UsuarioImplService usuarioService;
+    //Para almacenar los detalle de la oreden
+    private List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
+    //Para guardar los datos de la orden
+    private Orden orden = new Orden();
 
     @GetMapping("")
     public String home(Model model){
+
+        LOGGER.info("ENTRANDO AL INICIO DEL SISTEMA");
         model.addAttribute("productos", serviceProducto.findAll());
         return "usuario/home";
     }
@@ -41,7 +52,74 @@ public class HomeController {
     }
 
     @PostMapping("/carrito")
-    public String agregarCarrito(){
+    public String agregarCarrito(@RequestParam Integer id, @RequestParam Integer cantidad, Model model){
+        DetalleOrden ordenDetalle = new DetalleOrden();
+        Producto producto = new Producto();
+        double sumaTotal = 0;
+
+        Optional<Producto> productoOptional = serviceProducto.get(id);
+        LOGGER.info("Producto añadido: {}", productoOptional.get());
+        LOGGER.info("Cantidad; {}", cantidad);
+        producto = productoOptional.get();
+        ordenDetalle.setCantidad(cantidad);
+        ordenDetalle.setPrecio(producto.getPrecio());
+        ordenDetalle.setNombre(producto.getNombre());
+        ordenDetalle.setTotal(producto.getPrecio() * cantidad);
+        ordenDetalle.setProducto(producto);
+
+        //Validar que el producto no se agregue dos veces
+        Integer idProducto = producto.getId();
+        boolean ingresado = detalles.stream().anyMatch(pro -> pro.getProducto().getId() == idProducto);
+
+        if(!ingresado){
+            detalles.add(ordenDetalle);
+        }
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+        orden.setTotal(sumaTotal);
+        model.addAttribute("cart",detalles);
+        model.addAttribute("orden",orden);
         return "usuario/carrito";
+    }
+
+    //Quitar un producto del carrito
+    @GetMapping("delete/cart/{id}")
+    public String borrarProductoCarrito(@PathVariable Integer id, Model model){
+        //Lista nueva de productos
+        List<DetalleOrden> ordenNueva = new ArrayList<DetalleOrden>();
+        for(DetalleOrden detalleOrden: detalles){
+            if (detalleOrden.getProducto().getId() != id){
+                ordenNueva.add(detalleOrden);
+            }
+        }
+        //Poner la nueva lista con los producto restantes
+        detalles = ordenNueva;
+        double sumaTotal = 0;
+
+        sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
+        orden.setTotal(sumaTotal);
+        model.addAttribute("cart",detalles);
+        model.addAttribute("orden",orden);
+
+        return "usuario/carrito";
+    }
+    @GetMapping("/getCart")
+    public String getCart(Model model){
+
+        model.addAttribute("cart",detalles);
+        model.addAttribute("orden",orden);
+
+        return "/usuario/carrito";
+    }
+
+    @GetMapping("/orden")
+    public String orden(Model model){
+
+        Usuario user = usuarioService.buscarUsuarioId(1).get();
+
+
+        model.addAttribute("cart",detalles);
+        model.addAttribute("orden",orden);
+        model.addAttribute("usuario",user);
+        return "usuario/resumenorden";
     }
 }

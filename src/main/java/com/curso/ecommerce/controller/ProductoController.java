@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.curso.ecommerce.model.Producto;
 import com.curso.ecommerce.model.Usuario;
-import com.curso.ecommerce.service.ProductoService;
+import com.curso.ecommerce.service.ProductoImplService;
 import com.curso.ecommerce.service.UploadFileService;
 
 @Controller
@@ -27,14 +27,14 @@ public class ProductoController {
 	private final Logger LOGGER = LoggerFactory.getLogger(ProductoController.class);
 	
 	@Autowired
-	private ProductoService serviceProducto;
+	private ProductoImplService serviceProducto;
 	
 	@Autowired
 	private UploadFileService upload;
 	
 	@GetMapping("")
 	public String show(Model model) {
-		
+
 		model.addAttribute("productos", serviceProducto.findAll());
 		return "productos/show";
 	}

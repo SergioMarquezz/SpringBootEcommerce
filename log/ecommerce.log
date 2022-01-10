@@ -1,0 +1,38 @@
+2022-01-09 21:10:07.298  INFO 9980 --- [restartedMain] c.c.e.SpringEcommerceApplication         : Starting SpringEcommerceApplication using Java 11.0.11 on DESKTOP-5Q5BGEH with PID 9980 (C:\Users\ser_2\Documents\2022\Cursos\YouTube\Elivar Largo\workspace-springtools\Proyecto eCommerce\spring-ecommerce\target\classes started by SergioMarquez in C:\Users\ser_2\Documents\2022\Cursos\YouTube\Elivar Largo\workspace-springtools\Proyecto eCommerce\spring-ecommerce)
+2022-01-09 21:10:07.327  INFO 9980 --- [restartedMain] c.c.e.SpringEcommerceApplication         : No active profile set, falling back to default profiles: default
+2022-01-09 21:10:07.716  INFO 9980 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-01-09 21:10:07.717  INFO 9980 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-01-09 21:10:11.686  INFO 9980 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-01-09 21:10:11.909  INFO 9980 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 156 ms. Found 2 JPA repository interfaces.
+2022-01-09 21:10:14.573  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-01-09 21:10:14.622  INFO 9980 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-01-09 21:10:14.672  INFO 9980 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.55]
+2022-01-09 21:10:15.172  INFO 9980 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-01-09 21:10:15.173  INFO 9980 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7454 ms
+2022-01-09 21:10:39.330  INFO 9980 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-01-09 21:10:39.555  INFO 9980 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.1.Final
+2022-01-09 21:10:40.103  INFO 9980 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-01-09 21:10:42.875  INFO 9980 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-01-09 21:10:45.618  INFO 9980 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-01-09 21:10:45.711  INFO 9980 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2022-01-09 21:10:50.137  INFO 9980 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-01-09 21:10:50.162  INFO 9980 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-01-09 21:10:51.546  WARN 9980 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-01-09 21:10:52.979  INFO 9980 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-01-09 21:10:53.195  INFO 9980 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-01-09 21:10:53.261  INFO 9980 --- [restartedMain] c.c.e.SpringEcommerceApplication         : Started SpringEcommerceApplication in 48.131 seconds (JVM running for 78.296)
+2022-01-09 21:12:34.172  INFO 9980 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-01-09 21:12:34.173  INFO 9980 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-01-09 21:12:34.175  INFO 9980 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-01-09 21:12:34.323  INFO 9980 --- [http-nio-8080-exec-1] c.c.ecommerce.controller.HomeController  : ENTRANDO AL INICIO DEL SISTEMA
+2022-01-09 21:13:48.702  INFO 9980 --- [http-nio-8080-exec-4] c.c.ecommerce.controller.HomeController  : Id producto enviado como parametro 4
+2022-01-09 21:13:51.476  INFO 9980 --- [http-nio-8080-exec-8] c.c.ecommerce.controller.HomeController  : Producto añadido: Producto [id=4, nombre=Microfono, descripcion=Micrófono de corbatín, imagen=yeti.jpg, precio=200.0, cantidad=4000]
+2022-01-09 21:13:51.492  INFO 9980 --- [http-nio-8080-exec-8] c.c.ecommerce.controller.HomeController  : Cantidad; 2
+2022-01-09 21:13:54.750  INFO 9980 --- [http-nio-8080-exec-4] c.c.ecommerce.controller.HomeController  : ENTRANDO AL INICIO DEL SISTEMA
+2022-01-09 21:13:56.914  INFO 9980 --- [http-nio-8080-exec-8] c.c.ecommerce.controller.HomeController  : Id producto enviado como parametro 3
+2022-01-09 21:13:59.555  INFO 9980 --- [http-nio-8080-exec-6] c.c.ecommerce.controller.HomeController  : Producto añadido: Producto [id=3, nombre=Televisor, descripcion=Pantalla de 50", imagen=TV.jpg, precio=600.55, cantidad=5]
+2022-01-09 21:13:59.555  INFO 9980 --- [http-nio-8080-exec-6] c.c.ecommerce.controller.HomeController  : Cantidad; 2
+2022-01-09 21:14:49.156  INFO 9980 --- [http-nio-8080-exec-10] c.c.ecommerce.controller.HomeController  : ENTRANDO AL INICIO DEL SISTEMA
+2022-01-09 21:14:56.190  INFO 9980 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-01-09 21:14:56.217  INFO 9980 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-01-09 21:14:58.004  INFO 9980 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

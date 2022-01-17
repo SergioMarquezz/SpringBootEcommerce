@@ -18,4 +18,9 @@ public class UsuarioImplService implements UsuarioDao {
     public Optional<Usuario> buscarUsuarioId(Integer id) {
         return usuarioJpa.findById(id);
     }
+
+    @Override
+    public Usuario guardar(Usuario usuario) {
+        return usuarioJpa.save(usuario);
+    }
 }

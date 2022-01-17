@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface UsuarioDao {
 
     Optional<Usuario> buscarUsuarioId(Integer id);
+    Usuario guardar(Usuario usuario);
 }

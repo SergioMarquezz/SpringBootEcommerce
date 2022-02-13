@@ -17,7 +17,9 @@
 
 <body>
 
-    <div th:include="usuario/templateUsuario.html::header"></div>
+    <div th:include="usuario/templateUsuario.html::header" th:if="${sesion == null}"></div>
+
+    <div th:include="usuario/templateUsuario.html::header-user" th:unless="${sesion == null}"></div>
 
     <!-- Page Content -->
     <div class="container">

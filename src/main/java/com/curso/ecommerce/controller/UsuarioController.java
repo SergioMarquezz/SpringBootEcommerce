@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -37,5 +40,25 @@ public class UsuarioController {
         serviceUsuario.guardar(user);
 
         return "redirect:/";
+    }
+
+    @PostMapping("/acceder")
+    public String acceder(Usuario user, HttpSession session){
+        LOGGER.info("ACCESOS : {}",user);
+        String vista = "";
+        Optional<Usuario> usuario = serviceUsuario.buscarPorEmail(user.getEmail());
+        if (usuario.isPresent()){
+            session.setAttribute("idUsuario",usuario.get().getId());
+            if (usuario.get().getTipo().equals("ADMIN")){
+                vista = "redirect:/administrador";
+            }
+            else{
+                vista = "redirect:/";
+            }
+        }
+        else{
+            LOGGER.info("EL USUARIO NO EXISTE");
+        }
+        return vista;
     }
 }

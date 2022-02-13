@@ -8,4 +8,5 @@ public interface UsuarioDao {
 
     Optional<Usuario> buscarUsuarioId(Integer id);
     Usuario guardar(Usuario usuario);
+    Optional<Usuario> buscarPorEmail(String email);
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,9 +43,9 @@ public class HomeController {
     private Orden orden = new Orden();
 
     @GetMapping("")
-    public String home(Model model){
+    public String home(Model model, HttpSession session){
 
-        LOGGER.info("ENTRANDO AL INICIO DEL SISTEMA");
+        LOGGER.info("SESSION DEL USUARIO {}",session.getAttribute("idUsuario"));
         model.addAttribute("productos", serviceProducto.findAll());
         return "usuario/home";
     }
@@ -121,9 +122,9 @@ public class HomeController {
     }
 
     @GetMapping("/orden")
-    public String orden(Model model){
+    public String orden(Model model, HttpSession session){
 
-        Usuario user = usuarioService.buscarUsuarioId(1).get();
+        Usuario user = usuarioService.buscarUsuarioId(Integer.parseInt(session.getAttribute("idUsuario").toString())).get();
 
         model.addAttribute("cart",detalles);
         model.addAttribute("orden",orden);
@@ -133,13 +134,13 @@ public class HomeController {
 
     //Guardar la orden
     @GetMapping("/saveOrden")
-    public String guardarOrden(){
+    public String guardarOrden(HttpSession session){
         Date fechaCreacion = new Date();
         orden.setFechaCreacion(fechaCreacion);
         orden.setNumero(ordenService.generarNumeroOrden());
 
         //Usuario
-        Usuario user = usuarioService.buscarUsuarioId(1).get();
+        Usuario user = usuarioService.buscarUsuarioId(Integer.parseInt(session.getAttribute("idUsuario").toString())).get();
         orden.setUsuario(user);
         ordenService.save(orden);
 

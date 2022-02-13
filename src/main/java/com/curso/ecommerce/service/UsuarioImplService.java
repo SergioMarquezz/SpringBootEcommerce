@@ -23,4 +23,9 @@ public class UsuarioImplService implements UsuarioDao {
     public Usuario guardar(Usuario usuario) {
         return usuarioJpa.save(usuario);
     }
+
+    @Override
+    public Optional<Usuario> buscarPorEmail(String email) {
+        return usuarioJpa.buscarPorEmail(email);
+    }
 }

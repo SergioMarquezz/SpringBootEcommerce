@@ -1,6 +1,8 @@
 package com.curso.ecommerce.controller;
 
+import com.curso.ecommerce.model.Orden;
 import com.curso.ecommerce.model.Usuario;
+import com.curso.ecommerce.service.OrdenImplService;
 import com.curso.ecommerce.service.UsuarioImplService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +26,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioImplService serviceUsuario;
+
+    @Autowired
+    private OrdenImplService serviceOrden;
 
     @GetMapping("/login")
     public String login(){
@@ -68,7 +75,24 @@ public class UsuarioController {
     public String obtenerCompras(Model model, HttpSession session){
 
         model.addAttribute("sesion",session.getAttribute("idUsuario"));
+        Integer idUsuario = Integer.parseInt(session.getAttribute("idUsuario").toString());
+        Usuario usuario = serviceUsuario.buscarUsuarioId(idUsuario).get();
+        List<Orden> ordenes = serviceOrden.findByUsuario(usuario);
 
+        model.addAttribute("ordenes", ordenes);
         return "usuario/compras";
+    }
+
+    @GetMapping("/detalle/{id}")
+    public String detalleOrdenUsuario(@PathVariable Integer id, HttpSession sesion, Model model){
+
+        LOGGER.info("Id de la orden {}", id);
+        Optional<Orden> orden = serviceOrden.ordenPorID(id);
+
+        model.addAttribute("detalles", orden.get().getDetalle());
+
+        model.addAttribute("sesion",sesion.getAttribute("idUsuario"));
+
+        return "usuario/detallecompra";
     }
 }

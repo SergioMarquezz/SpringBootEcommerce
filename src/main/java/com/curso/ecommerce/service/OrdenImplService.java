@@ -1,6 +1,7 @@
 package com.curso.ecommerce.service;
 
 import com.curso.ecommerce.model.Orden;
+import com.curso.ecommerce.model.Usuario;
 import com.curso.ecommerce.repository.OrdenDao;
 import com.curso.ecommerce.repository.OrdenDaoJpa;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrdenImplService implements OrdenDao {
@@ -21,6 +23,11 @@ public class OrdenImplService implements OrdenDao {
     @Override
     public List<Orden> listaOrdenes() {
         return jpaOrden.findAll();
+    }
+
+    @Override
+    public Optional<Orden> ordenPorID(Integer id) {
+        return jpaOrden.findById(id);
     }
 
     @Override
@@ -58,5 +65,11 @@ public class OrdenImplService implements OrdenDao {
             numeroConcatenado = "0000000"+String.valueOf(numero);
         }
         return numeroConcatenado;
+    }
+
+    @Override
+    public List<Orden> findByUsuario(Usuario user) {
+
+        return jpaOrden.findByUsuario(user);
     }
 }

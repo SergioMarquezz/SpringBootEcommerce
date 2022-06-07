@@ -6,6 +6,7 @@ import com.curso.ecommerce.repository.UsuarioDaoJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -13,6 +14,11 @@ public class UsuarioImplService implements UsuarioDao {
 
     @Autowired
     private UsuarioDaoJpa usuarioJpa;
+
+    @Override
+    public List<Usuario> findAll() {
+        return usuarioJpa.findAll();
+    }
 
     @Override
     public Optional<Usuario> buscarUsuarioId(Integer id) {
